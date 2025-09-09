@@ -13,16 +13,16 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
-      --bg: #f9fafb; 
-      --text: #222; 
-      --muted: #555;
+      --bg: #0a0a0a;
+      --text: #ffffff;
+      --muted: #aaaaaa;
       --brand: #0a5d36;
       --brand-light: #0c7744;
-      --accent: #f97316;
-      --accent-light: #fdba74;
-      --radius: 16px; 
-      --shadow: 0 6px 16px rgba(0,0,0,.1);
-      --card-bg: rgba(255, 255, 255, 0.8);
+      --accent: #ffdd00;
+      --accent-light: #ffea80;
+      --radius: 16px;
+      --shadow: 0 6px 16px rgba(0,0,0,.3);
+      --card-bg: rgba(30, 30, 30, 0.8);
     }
     
     * {
@@ -32,10 +32,11 @@
     }
     
     body {
-      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial; 
-      background: var(--bg); 
+      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial;
+      background: var(--bg);
       color: var(--text);
       line-height: 1.6;
+      overflow-x: hidden;
     }
 
     header {
@@ -43,9 +44,9 @@
       top: 0;
       z-index: 100;
       backdrop-filter: blur(10px);
-      background: rgba(255, 255, 255, 0.85);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      background: rgba(10, 10, 10, 0.85);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     }
     
     .nav {
@@ -63,7 +64,7 @@
       gap: 12px;
       font-weight: 800;
       font-size: 20px;
-      color: var(--brand);
+      color: var(--text);
     }
     
     .brand img {
@@ -75,29 +76,39 @@
       border: 2px solid var(--brand);
     }
     
-    .whatsapp-badge {
+    .support-btn {
       display: flex;
       align-items: center;
       gap: 6px;
-      background: rgba(37, 211, 102, 0.1);
-      color: #075e54;
+      background: rgba(37, 211, 102, 0.15);
+      color: #25D366;
       padding: 8px 14px;
       border-radius: 20px;
       font-size: 14px;
       font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    .support-btn:hover {
+      background: rgba(37, 211, 102, 0.25);
+      transform: translateY(-2px);
     }
 
     .hero {
       text-align: center;
-      padding: 40px 20px 30px;
-      background: linear-gradient(to bottom, rgba(10, 93, 54, 0.05), transparent);
+      padding: 30px 20px 20px;
+      background: linear-gradient(to bottom, rgba(10, 93, 54, 0.1), transparent);
     }
     
     .hero h1 {
       font-size: 32px;
       margin-bottom: 12px;
-      color: var(--brand);
+      color: var(--text);
       font-weight: 800;
+      background: linear-gradient(135deg, var(--brand), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
     
     .hero p {
@@ -119,12 +130,13 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      background: rgba(255, 255, 255, 0.7);
+      background: rgba(255, 255, 255, 0.1);
       padding: 8px 16px;
       border-radius: 20px;
       font-size: 14px;
-      color: var(--brand);
+      color: var(--text);
       font-weight: 500;
+      backdrop-filter: blur(10px);
     }
     
     .feature i {
@@ -137,33 +149,30 @@
       padding: 20px;
     }
     
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr;
+    .video-feed {
+      display: flex;
+      flex-direction: column;
       gap: 30px;
-    }
-    
-    @media (min-width: 768px) {
-      .grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
+      max-width: 500px;
+      margin: 0 auto;
     }
 
     .card {
       border-radius: var(--radius);
       background: var(--card-bg);
       backdrop-filter: blur(14px);
-      border: 1px solid rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.05);
       box-shadow: var(--shadow);
       overflow: hidden;
       display: flex;
       flex-direction: column;
       transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
     }
     
     .card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 12px 20px rgba(0, 0, 0, 0.4);
     }
     
     .card-header {
@@ -172,12 +181,14 @@
     
     .media {
       position: relative;
-      height: 280px;
+      height: 70vh;
+      max-height: 700px;
+      min-height: 500px;
       overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #f0f0f0;
+      background: #000;
     }
     
     .media video {
@@ -185,38 +196,78 @@
       height: 100%;
       object-fit: cover;
       display: block;
-      transition: transform 0.5s;
     }
     
-    .card:hover .media video {
-      transform: scale(1.05);
-    }
-    
-    .play-btn {
+    .video-controls {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: rgba(255, 255, 255, 0.8);
-      width: 60px;
-      height: 60px;
+      bottom: 15px;
+      right: 15px;
+      display: flex;
+      gap: 10px;
+      z-index: 10;
+    }
+    
+    .control-btn {
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
+      background: rgba(0, 0, 0, 0.5);
+      border: none;
+      color: white;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      opacity: 0.8;
-      transition: opacity 0.3s;
-      z-index: 5;
+      transition: all 0.3s;
+      backdrop-filter: blur(10px);
     }
     
-    .play-btn:hover {
-      opacity: 1;
+    .control-btn:hover {
+      background: rgba(0, 0, 0, 0.7);
+      transform: scale(1.1);
     }
     
-    .play-btn i {
-      font-size: 24px;
-      color: var(--brand);
+    .volume-slider {
+      position: absolute;
+      height: 100px;
+      bottom: 50px;
+      right: 15px;
+      writing-mode: bt-lr;
+      -webkit-appearance: slider-vertical;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 20px;
+      padding: 5px;
+      backdrop-filter: blur(10px);
+    }
+    
+    .product-info {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      z-index: 10;
+      text-align: left;
+      max-width: 70%;
+    }
+    
+    .product-info h3 {
+      font-size: 22px;
+      margin-bottom: 5px;
+      color: var(--text);
+      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    }
+    
+    .product-info p {
+      font-size: 14px;
+      color: var(--muted);
+      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+      margin-bottom: 10px;
+    }
+    
+    .price {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--accent);
+      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
     }
     
     .meta {
@@ -224,41 +275,16 @@
       text-align: center;
     }
     
-    .meta h3 {
-      margin-bottom: 8px;
-      font-size: 22px;
-      color: var(--brand);
-    }
-    
-    .meta p {
-      font-size: 15px;
-      color: var(--muted);
-      margin-bottom: 12px;
-    }
-    
-    .price {
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--brand);
-      margin-bottom: 16px;
-    }
-    
-    .price small {
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--muted);
-    }
-
     .qty {
       display: inline-flex;
       align-items: center;
       gap: 12px;
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.1);
       padding: 8px 16px;
       border-radius: 12px;
       backdrop-filter: blur(8px);
       margin-bottom: 16px;
-      border: 1px solid rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.08);
     }
     
     .qty button {
@@ -267,7 +293,7 @@
       font-weight: 700;
       font-size: 20px;
       cursor: pointer;
-      color: var(--brand);
+      color: var(--text);
       width: 30px;
       height: 30px;
       border-radius: 50%;
@@ -278,7 +304,7 @@
     }
     
     .qty button:hover {
-      background: rgba(10, 93, 54, 0.1);
+      background: rgba(255, 255, 255, 0.1);
     }
     
     .qty span {
@@ -286,13 +312,14 @@
       text-align: center;
       font-size: 18px;
       font-weight: 600;
+      color: var(--text);
     }
     
     .total {
       margin-top: 8px;
       font-size: 16px;
       font-weight: 600;
-      color: var(--brand);
+      color: var(--accent);
     }
 
     .btn {
@@ -320,18 +347,18 @@
     .btn.buy:hover {
       background: linear-gradient(135deg, var(--brand-light), var(--brand));
       transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(10, 93, 54, 0.3);
+      box-shadow: 0 8px 20px rgba(10, 93, 54, 0.5);
     }
     
     .btn.info {
-      background: rgba(255, 255, 255, 0.8);
+      background: rgba(255, 255, 255, 0.1);
       backdrop-filter: blur(6px);
-      border: 1px solid rgba(0, 0, 0, 0.08);
-      color: var(--brand);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text);
     }
     
     .btn.info:hover {
-      background: rgba(10, 93, 54, 0.05);
+      background: rgba(255, 255, 255, 0.2);
       transform: translateY(-2px);
     }
     
@@ -344,7 +371,7 @@
     .btn.support:hover {
       background: linear-gradient(135deg, #128C7E, #25D366);
       transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(18, 140, 126, 0.3);
+      box-shadow: 0 8px 20px rgba(18, 140, 126, 0.5);
     }
     
     .cart-summary {
@@ -355,7 +382,7 @@
       color: white;
       padding: 12px 20px;
       border-radius: 50px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
       display: flex;
       align-items: center;
       gap: 10px;
@@ -371,7 +398,7 @@
     
     .cart-count {
       background: var(--accent);
-      color: white;
+      color: black;
       width: 24px;
       height: 24px;
       border-radius: 50%;
@@ -388,9 +415,9 @@
       text-align: center;
       color: var(--muted);
       font-size: 14px;
-      background: rgba(255, 255, 255, 0.7);
+      background: rgba(30, 30, 30, 0.7);
       backdrop-filter: blur(10px);
-      border-top: 1px solid rgba(0, 0, 0, 0.05);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
     
     .footer-content {
@@ -407,7 +434,7 @@
     }
     
     .footer-links a {
-      color: var(--brand);
+      color: var(--text);
       text-decoration: none;
       transition: color 0.2s;
     }
@@ -426,7 +453,7 @@
       color: white;
       padding: 12px 24px;
       border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
       z-index: 1000;
       opacity: 0;
       transition: opacity 0.3s;
@@ -435,25 +462,71 @@
     .notification.show {
       opacity: 1;
     }
-
-    /* Support button in header */
-    .support-btn {
+    
+    /* YouTube Shorts inspired UI */
+    .video-ui {
+      position: absolute;
+      right: 15px;
+      bottom: 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+      z-index: 10;
+    }
+    
+    .action-button {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      color: white;
+      cursor: pointer;
+    }
+    
+    .action-button i {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
       display: flex;
       align-items: center;
-      gap: 6px;
-      background: rgba(37, 211, 102, 0.1);
-      color: #075e54;
-      padding: 8px 14px;
-      border-radius: 20px;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(10px);
+      font-size: 20px;
       transition: all 0.3s;
     }
     
-    .support-btn:hover {
-      background: rgba(37, 211, 102, 0.2);
-      transform: translateY(-2px);
+    .action-button:hover i {
+      background: rgba(0, 0, 0, 0.7);
+      transform: scale(1.1);
+    }
+    
+    .action-button span {
+      font-size: 12px;
+      font-weight: 500;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.7);
+    }
+    
+    /* Progress bar */
+    .progress-container {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      right: 10px;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 3px;
+      z-index: 10;
+      overflow: hidden;
+    }
+    
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: var(--accent);
+      border-radius: 3px;
+      transition: width 0.1s linear;
     }
     
     /* Responsive adjustments */
@@ -468,7 +541,8 @@
       }
       
       .media {
-        height: 220px;
+        height: 65vh;
+        min-height: 400px;
       }
       
       .features {
@@ -479,6 +553,16 @@
       .footer-links {
         flex-direction: column;
         gap: 10px;
+      }
+      
+      .video-ui {
+        bottom: 70px;
+      }
+      
+      .action-button i {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
       }
     }
     
@@ -493,7 +577,7 @@
       }
       
       .hero {
-        padding: 30px 15px 20px;
+        padding: 20px 15px 15px;
       }
       
       .hero h1 {
@@ -501,7 +585,8 @@
       }
       
       .media {
-        height: 200px;
+        height: 60vh;
+        min-height: 350px;
       }
       
       .meta {
@@ -517,6 +602,15 @@
         right: 15px;
         padding: 10px 16px;
         font-size: 14px;
+      }
+      
+      .product-info {
+        bottom: 15px;
+        left: 15px;
+      }
+      
+      .product-info h3 {
+        font-size: 18px;
       }
     }
   </style>
@@ -556,24 +650,49 @@
     </section>
 
     <div class="container">
-      <section class="grid">
+      <section class="video-feed">
         <!-- Budgie -->
         <article class="card">
           <div class="card-header">
             <div class="media">
-              <video id="budgie-video" muted loop playsinline>
+              <div class="progress-container">
+                <div class="progress-bar" id="budgie-progress"></div>
+              </div>
+              <video id="budgie-video" muted loop playsinline autoplay>
                 <source src="budgie.mp4" type="video/mp4">
                 Your browser does not support the video tag.
               </video>
-              <div class="play-btn" data-video="budgie-video">
-                <i class="fas fa-play"></i>
+              
+              <div class="video-ui">
+                <div class="action-button" onclick="likeVideo('budgie')">
+                  <i class="fas fa-heart"></i>
+                  <span id="budgie-likes">243</span>
+                </div>
+                <div class="action-button" onclick="window.open('https://api.whatsapp.com/send/?phone=9336621196&text=Hi!%20I%20love%20this%20Budgie%20Friend!', '_blank')">
+                  <i class="fab fa-whatsapp"></i>
+                  <span>Order</span>
+                </div>
+                <div class="action-button" onclick="shareVideo('budgie')">
+                  <i class="fas fa-share"></i>
+                  <span>Share</span>
+                </div>
+              </div>
+              
+              <div class="video-controls">
+                <button class="control-btn" onclick="toggleMute('budgie')">
+                  <i class="fas fa-volume-mute" id="budgie-volume-icon"></i>
+                </button>
+                <input type="range" class="volume-slider" id="budgie-volume" min="0" max="1" step="0.1" value="0" style="display: none;">
+              </div>
+              
+              <div class="product-info">
+                <h3>Budgie Friend</h3>
+                <p>Colorful, playful companion. Loves company and interaction.</p>
+                <div class="price">₹299 <small>/ piece</small></div>
               </div>
             </div>
           </div>
           <div class="meta">
-            <h3>Budgie Friend</h3>
-            <p>Colorful, playful companion. Loves company and interaction.</p>
-            <div class="price">₹299 <small>/ piece</small></div>
             <div class="qty" data-price="299">
               <button class="dec">−</button>
               <span class="count">1</span>
@@ -595,19 +714,44 @@
         <article class="card">
           <div class="card-header">
             <div class="media">
-              <video id="finch-video" muted loop playsinline>
+              <div class="progress-container">
+                <div class="progress-bar" id="finch-progress"></div>
+              </div>
+              <video id="finch-video" muted loop playsinline autoplay>
                 <source src="finch.mp4" type="video/mp4">
                 Your browser does not support the video tag.
               </video>
-              <div class="play-btn" data-video="finch-video">
-                <i class="fas fa-play"></i>
+              
+              <div class="video-ui">
+                <div class="action-button" onclick="likeVideo('finch')">
+                  <i class="fas fa-heart"></i>
+                  <span id="finch-likes">187</span>
+                </div>
+                <div class="action-button" onclick="window.open('https://api.whatsapp.com/send/?phone=9336621196&text=Hi!%20I%20love%20this%20Finch%20Friend!', '_blank')">
+                  <i class="fab fa-whatsapp"></i>
+                  <span>Order</span>
+                </div>
+                <div class="action-button" onclick="shareVideo('finch')">
+                  <i class="fas fa-share"></i>
+                  <span>Share</span>
+                </div>
+              </div>
+              
+              <div class="video-controls">
+                <button class="control-btn" onclick="toggleMute('finch')">
+                  <i class="fas fa-volume-mute" id="finch-volume-icon"></i>
+                </button>
+                <input type="range" class="volume-slider" id="finch-volume" min="0" max="1" step="0.1" value="0" style="display: none;">
+              </div>
+              
+              <div class="product-info">
+                <h3>Finch Friend</h3>
+                <p>Finches are gentle, melodious little birds that thrive best with companions.</p>
+                <div class="price">₹249 <small>/ piece</small></div>
               </div>
             </div>
           </div>
           <div class="meta">
-            <h3>Finch Friend</h3>
-            <p>Finches are gentle, melodious little birds that thrive best with companions.</p>
-            <div class="price">₹249 <small>/ piece</small></div>
             <div class="qty" data-price="249">
               <button class="dec">−</button>
               <span class="count">1</span>
@@ -658,7 +802,7 @@
   </footer>
 
   <script>
-    const WHATSAPP_PHONE = '9336621196'; // Your WhatsApp number
+    const WHATSAPP_PHONE = '9336621196';
     const SUPPORT_MESSAGE = "Hi, I need assistance with Blank Pets. Can you please help me?";
     
     document.getElementById('year').textContent = new Date().getFullYear();
@@ -700,21 +844,100 @@
       openWhatsApp(SUPPORT_MESSAGE);
     });
     
-    // Video play/pause functionality
-    document.querySelectorAll('.play-btn').forEach(btn => {
-      btn.addEventListener('click', function() {
-        const videoId = this.getAttribute('data-video');
-        const video = document.getElementById(videoId);
-        
-        if (video.paused) {
+    // Video progress tracking
+    function setupVideoProgress(videoId) {
+      const video = document.getElementById(`${videoId}-video`);
+      const progressBar = document.getElementById(`${videoId}-progress`);
+      
+      video.addEventListener('timeupdate', () => {
+        const percentage = (video.currentTime / video.duration) * 100;
+        progressBar.style.width = `${percentage}%`;
+      });
+      
+      video.addEventListener('ended', () => {
+        // Reset and replay
+        setTimeout(() => {
+          video.currentTime = 0;
           video.play();
-          this.innerHTML = '<i class="fas fa-pause"></i>';
+          progressBar.style.width = '0%';
+        }, 1000);
+      });
+    }
+    
+    // Toggle mute functionality
+    function toggleMute(videoId) {
+      const video = document.getElementById(`${videoId}-video`);
+      const volumeIcon = document.getElementById(`${videoId}-volume-icon`);
+      const volumeSlider = document.getElementById(`${videoId}-volume`);
+      
+      if (video.muted) {
+        video.muted = false;
+        volumeIcon.classList.remove('fa-volume-mute');
+        volumeIcon.classList.add('fa-volume-up');
+        volumeSlider.style.display = 'block';
+      } else {
+        video.muted = true;
+        volumeIcon.classList.remove('fa-volume-up');
+        volumeIcon.classList.add('fa-volume-mute');
+        volumeSlider.style.display = 'none';
+      }
+    }
+    
+    // Volume control
+    function setupVolumeControl(videoId) {
+      const video = document.getElementById(`${videoId}-video`);
+      const volumeSlider = document.getElementById(`${videoId}-volume`);
+      
+      volumeSlider.addEventListener('input', () => {
+        video.volume = volumeSlider.value;
+      });
+    }
+    
+    // Like functionality
+    function likeVideo(videoId) {
+      const likeCount = document.getElementById(`${videoId}-likes`);
+      let count = parseInt(likeCount.textContent);
+      count++;
+      likeCount.textContent = count;
+      
+      const heartIcon = likeCount.previousElementSibling;
+      heartIcon.style.color = '#ff5252';
+      
+      showNotification('Liked!');
+    }
+    
+    // Share functionality
+    function shareVideo(videoId) {
+      if (navigator.share) {
+        navigator.share({
+          title: 'Blank Pets',
+          text: 'Check out this beautiful bird from Blank Pets!',
+          url: window.location.href
+        })
+        .catch(error => {
+          console.log('Error sharing:', error);
+        });
+      } else {
+        showNotification('Link copied to clipboard!');
+      }
+    }
+    
+    // Initialize videos
+    document.querySelectorAll('video').forEach(video => {
+      video.addEventListener('click', function() {
+        if (this.paused) {
+          this.play();
         } else {
-          video.pause();
-          this.innerHTML = '<i class="fas fa-play"></i>';
+          this.pause();
         }
       });
     });
+    
+    // Set up video progress and volume controls
+    setupVideoProgress('budgie');
+    setupVideoProgress('finch');
+    setupVolumeControl('budgie');
+    setupVolumeControl('finch');
     
     // Quantity controls
     document.querySelectorAll('.qty').forEach(q => {
