@@ -1,1 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/png" href="logo.png">
+  <title>Blank Pets — Budgie & Finch Friends</title>
+  <meta name="theme-color" content="#0a5d36">
+  <meta name="description" content="Blank Pets: buy budgie & finch friends with video previews. Mobile-optimized, WhatsApp ordering." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --bg: #f9fafb; 
+      --text: #222; 
+      --muted: #555;
+      --brand: #0a5d36;
+      --brand-light: #0c7744;
+      --accent: #f97316;
+      --accent-light: #fdba74;
+      --radius: 16px; 
+      --shadow: 0 6px 16px rgba(0,0,0,.1);
+      --card-bg: rgba(255, 255, 255, 0.8);
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial; 
+      background: var(--bg); 
+      color: var(--text);
+      line-height: 1.6;
+    }
 
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.85);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+    
+    .nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      font-size: 20px;
+      color: var(--brand);
+    }
+    
+    .brand img {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: var(--shadow);
+      border: 2px solid var(--brand);
+    }
+    
+    .whatsapp-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(37, 211, 102, 0.1);
+      color: #075e54;
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 40px 20px 30px;
+      background: linear-gradient(to bottom, rgba(10, 93, 54, 0.05), transparent);
+    }
+    
+    .hero h1 {
+      font-size: 32px;
+      margin-bottom: 12px;
+      color: var(--brand);
+      font-weight: 800;
+    }
+    
+    .hero p {
+      color: var(--muted);
+      font-size: 16px;
+      max-width: 500px;
+      margin: 0 auto 20px;
+    }
+    
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+    }
+    
+    .feature {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.7);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      color: var(--brand);
+      font-weight: 500;
+    }
+    
+    .feature i {
+      color: var(--accent);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+    
+    @media (min-width: 768px) {
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .card {
+      border-radius: var(--radius);
+      background: var(--card-bg);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+    }
+    
+    .card-header {
+      position: relative;
+    }
+    
+    .media {
+      position: relative;
+      height: 250px;
+      overflow: hidden;
+    }
+    
+    .media video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s;
+    }
+    
+    .card:hover .media video {
+      transform: scale(1.05);
+    }
+    
+    .play-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(255, 255, 255, 0.8);
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0.8;
+      transition: opacity 0.3s;
+    }
+    
+    .play-btn:hover {
+      opacity: 1;
+    }
+    
+    .play-btn i {
+      font-size: 24px;
+      color: var(--brand);
+    }
+    
+    .meta {
+      padding: 20px;
+      text-align: center;
+    }
+    
+    .meta h3 {
+      margin-bottom: 8px;
+      font-size: 22px;
+      color: var(--brand);
+    }
+    
+    .meta p {
+      font-size: 15px;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    
+    .price {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--brand);
+      margin-bottom: 16px;
+    }
+    
+    .price small {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--muted);
+    }
+
+    .qty {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 8px 16px;
+      border-radius: 12px;
+      backdrop-filter: blur(8px);
+      margin-bottom: 16px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+    }
+    
+    .qty button {
+      border: none;
+      background: transparent;
+      font-weight: 700;
+      font-size: 20px;
+      cursor: pointer;
+      color: var(--brand);
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    
+    .qty button:hover {
+      background: rgba(10, 93, 54, 0.1);
+    }
+    
+    .qty span {
+      min-width: 30px;
+      text-align: center;
+      font-size: 18px;
+      font-weight: 600;
+    }
+    
+    .total {
+      margin-top: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--brand);
+    }
+
+    .btn {
+      width: 100%;
+      padding: 16px;
+      border: none;
+      border-radius: 14px;
+      font-weight: 600;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      transition: all 0.3s;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    
+    .btn.buy {
+      background: linear-gradient(135deg, var(--brand), var(--brand-light));
+      color: #fff;
+    }
+    
+    .btn.buy:hover {
+      background: linear-gradient(135deg, var(--brand-light), var(--brand));
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(10, 93, 54, 0.3);
+    }
+    
+    .btn.info {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      color: var(--brand);
+    }
+    
+    .btn.info:hover {
+      background: rgba(10, 93, 54, 0.05);
+      transform: translateY(-2px);
+    }
+    
+    .cart-summary {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--brand);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 50px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      z-index: 90;
+      transition: all 0.3s;
+    }
+    
+    .cart-summary:hover {
+      background: var(--brand-light);
+      transform: translateY(-2px);
+    }
+    
+    .cart-count {
+      background: var(--accent);
+      color: white;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    footer {
+      margin-top: 60px;
+      padding: 30px 20px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    .footer-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    
+    .footer-links a {
+      color: var(--brand);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    
+    .footer-links a:hover {
+      color: var(--accent);
+      text-decoration: underline;
+    }
+    
+    .notification {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--brand);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    
+    .notification.show {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <div class="brand">
+        <img src="https://raw.githubusercontent.com/machine-code7/Image/refs/heads/main/logo.png" alt="Logo">
+        <span>Blank Pets</span>
+      </div>
+      <div class="whatsapp-badge">
+        <i class="fab fa-whatsapp"></i>
+        <span>WhatsApp Orders</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Budgie & Finch Friends</h1>
+      <p>Pick your feathered friend, watch their video, and order easily on WhatsApp.</p>
+      <div class="features">
+        <div class="feature">
+          <i class="fas fa-shipping-fast"></i>
+          <span>Quick Delivery</span>
+        </div>
+        <div class="feature">
+          <i class="fas fa-heart"></i>
+          <span>Healthy & Happy</span>
+        </div>
+        <div class="feature">
+          <i class="fas fa-headset"></i>
+          <span>Support</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="container">
+      <section class="grid">
+        <!-- Budgie -->
+        <article class="card">
+          <div class="card-header">
+            <div class="media">
+              <video id="budgie-video" muted loop playsinline>
+                <source src="budgie.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <div class="play-btn" data-video="budgie-video">
+                <i class="fas fa-play"></i>
+              </div>
+            </div>
+          </div>
+          <div class="meta">
+            <h3>Budgie Friend</h3>
+            <p>Colorful, playful companion. Loves company and interaction.</p>
+            <div class="price">₹299 <small>/ piece</small></div>
+            <div class="qty" data-price="299">
+              <button class="dec">−</button>
+              <span class="count">1</span>
+              <button class="inc">+</button>
+            </div>
+            <div class="total">Total: ₹299</div>
+            <button class="btn buy" data-name="Budgie Friend" data-price="299">
+              <i class="fab fa-whatsapp"></i>
+              Buy on WhatsApp
+            </button>
+            <button class="btn info" data-info="Budgies are social birds that thrive on interaction. They enjoy toys, mirrors, and being in pairs or small groups. Average lifespan is 5-8 years with proper care.">
+              <i class="fas fa-info-circle"></i>
+              More Info
+            </button>
+          </div>
+        </article>
+
+        <!-- Finch -->
+        <article class="card">
+          <div class="card-header">
+            <div class="media">
+              <video id="finch-video" muted loop playsinline>
+                <source src="finch.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <div class="play-btn" data-video="finch-video">
+                <i class="fas fa-play"></i>
+              </div>
+            </div>
+          </div>
+          <div class="meta">
+            <h3>Finch Friend</h3>
+            <p>Finches are gentle, melodious little birds that thrive best with companions.</p>
+            <div class="price">₹249 <small>/ piece</small></div>
+            <div class="qty" data-price="249">
+              <button class="dec">−</button>
+              <span class="count">1</span>
+              <button class="inc">+</button>
+            </div>
+            <div class="total">Total: ₹249</div>
+            <button class="btn buy" data-name="Finch Friend" data-price="249">
+              <i class="fab fa-whatsapp"></i>
+              Buy on WhatsApp
+            </button>
+            <button class="btn info" data-info="Finches enjoy small flocks and need space to fly. They're not typically hand-tamed but are delightful to watch. They live 5-10 years and enjoy baths and varied perches.">
+              <i class="fas fa-info-circle"></i>
+              More Info
+            </button>
+          </div>
+        </article>
+      </section>
+    </div>
+  </main>
+
+  <div class="cart-summary">
+    <i class="fas fa-shopping-cart"></i>
+    <span>Cart</span>
+    <div class="cart-count">0</div>
+  </div>
+
+  <div class="notification" id="notification">
+    Item added to cart!
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="#" data-info="We offer safe and comfortable transportation for your new feathered friends. Delivery within 24 hours in the city.">Delivery Info</a>
+        <a href="#" data-info="We provide care instructions and support for all our birds. Contact us anytime for advice.">Care Support</a>
+        <a href="#" data-info="All our birds are vet-checked and come with a health guarantee.">Health Guarantee</a>
+      </div>
+      <p>© <span id="year"></span> Blank Pets — Friends, not products.</p>
+    </div>
+  </footer>
+
+  <script>
+    const WHATSAPP_PHONE = '9336621196'; // Your WhatsApp number
+    document.getElementById('year').textContent = new Date().getFullYear();
+    
+    // Cart functionality
+    let cart = [];
+    
+    // Update cart display
+    function updateCart() {
+      const cartCount = document.querySelector('.cart-count');
+      const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+      cartCount.textContent = totalItems;
+    }
+    
+    // Show notification
+    function showNotification(message) {
+      const notification = document.getElementById('notification');
+      notification.textContent = message;
+      notification.classList.add('show');
+      
+      setTimeout(() => {
+        notification.classList.remove('show');
+      }, 3000);
+    }
+    
+    // Video play/pause functionality
+    document.querySelectorAll('.play-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const videoId = this.getAttribute('data-video');
+        const video = document.getElementById(videoId);
+        
+        if (video.paused) {
+          video.play();
+          this.innerHTML = '<i class="fas fa-pause"></i>';
+        } else {
+          video.pause();
+          this.innerHTML = '<i class="fas fa-play"></i>';
+        }
+      });
+    });
+    
+    // Quantity controls
+    document.querySelectorAll('.qty').forEach(q => {
+      const dec = q.querySelector('.dec');
+      const inc = q.querySelector('.inc');
+      const countEl = q.querySelector('.count');
+      const totalEl = q.closest('.meta').querySelector('.total');
+      const price = parseInt(q.getAttribute('data-price'), 10);
+      
+      // Update total display
+      function updateTotal() {
+        const count = parseInt(countEl.textContent, 10);
+        totalEl.textContent = `Total: ₹${price * count}`;
+      }
+      
+      dec.addEventListener('click', () => {
+        let n = parseInt(countEl.textContent, 10);
+        if (n > 1) {
+          countEl.textContent = n - 1;
+          updateTotal();
+        }
+      });
+      
+      inc.addEventListener('click', () => {
+        let n = parseInt(countEl.textContent, 10);
+        countEl.textContent = n + 1;
+        updateTotal();
+      });
+      
+      // Initialize total
+      updateTotal();
+    });
+    
+    // Buy button functionality
+    document.querySelectorAll('.btn.buy').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const card = btn.closest('.card');
+        const name = btn.dataset.name;
+        const price = parseInt(btn.dataset.price, 10);
+        const qty = parseInt(card.querySelector('.count').textContent, 10);
+        const total = price * qty;
+        
+        // Add to cart
+        const existingItemIndex = cart.findIndex(item => item.name === name);
+        if (existingItemIndex > -1) {
+          cart[existingItemIndex].quantity += qty;
+        } else {
+          cart.push({ name, price, quantity: qty });
+        }
+        
+        updateCart();
+        showNotification(`${qty} ${name} added to cart!`);
+        
+        // Prepare WhatsApp message
+        const msg = `Hi! I want to buy ${qty} x ${name} (₹${price} each). Total ₹${total}.`;
+        const enc = encodeURIComponent(msg);
+        const url = `https://api.whatsapp.com/send/?phone=${WHATSAPP_PHONE}&text=${enc}`;
+        
+        // Open WhatsApp after a brief delay to show notification
+        setTimeout(() => {
+          window.open(url, '_blank');
+        }, 1000);
+      });
+    });
+    
+    // Info button functionality
+    document.querySelectorAll('.btn.info').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const info = btn.getAttribute('data-info');
+        alert(info);
+      });
+    });
+    
+    // Footer links info
+    document.querySelectorAll('.footer-links a').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const info = link.getAttribute('data-info');
+        alert(info);
+      });
+    });
+    
+    // Cart summary click
+    document.querySelector('.cart-summary').addEventListener('click', () => {
+      if (cart.length === 0) {
+        alert('Your cart is empty!');
+        return;
+      }
+      
+      let cartSummary = 'Your Cart:\n\n';
+      let grandTotal = 0;
+      
+      cart.forEach(item => {
+        const itemTotal = item.price * item.quantity;
+        cartSummary += `${item.quantity} x ${item.name} - ₹${itemTotal}\n`;
+        grandTotal += itemTotal;
+      });
+      
+      cartSummary += `\nGrand Total: ₹${grandTotal}`;
+      
+      alert(cartSummary);
+    });
+  </script>
+</body>
+</html>
