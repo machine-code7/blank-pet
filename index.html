@@ -6,7 +6,7 @@
   <link rel="icon" type="image/png" href="logo.png">
   <title>Blank Pets — Online Pet's</title>
   <meta name="theme-color" content="#0a5d36">
-  <meta name="description" content="Blank Pets: buy budgie & finch friends with video previews. Mobile-optimized, WhatsApp ordering." />
+  <meta name="description" content="Blank Pets: buy budgie, finch, rabbit & white rat friends with video previews. Mobile-optimized, WhatsApp ordering." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -632,7 +632,7 @@
   <main>
     <section class="hero">
       <h1>Blank - Pet's Shop</h1>
-      <p>Pick your feathered friend, watch their video, and order easily on WhatsApp.</p>
+      <p>Pick your perfect pet friend, watch their video, and order easily on WhatsApp.</p>
       <div class="features">
         <div class="feature">
           <i class="fas fa-shipping-fast"></i>
@@ -768,6 +768,124 @@
             </button>
           </div>
         </article>
+
+        <!-- Rabbit -->
+        <article class="card">
+          <div class="card-header">
+            <div class="media">
+              <div class="progress-container">
+                <div class="progress-bar" id="rabbit-progress"></div>
+              </div>
+              <video id="rabbit-video" muted loop playsinline autoplay>
+                <source src="rabbit.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              
+              <div class="video-ui">
+                <div class="action-button" onclick="likeVideo('rabbit')">
+                  <i class="fas fa-heart"></i>
+                  <span id="rabbit-likes">312</span>
+                </div>
+                <div class="action-button" onclick="window.open('https://api.whatsapp.com/send/?phone=9336621196&text=Hi!%20I%20love%20this%20Rabbit%20Friend!', '_blank')">
+                  <i class="fab fa-whatsapp"></i>
+                  <span>Order</span>
+                </div>
+                <div class="action-button" onclick="shareVideo('rabbit')">
+                  <i class="fas fa-share"></i>
+                  <span>Share</span>
+                </div>
+              </div>
+              
+              <div class="video-controls">
+                <button class="control-btn" onclick="toggleMute('rabbit')">
+                  <i class="fas fa-volume-mute" id="rabbit-volume-icon"></i>
+                </button>
+                <input type="range" class="volume-slider" id="rabbit-volume" min="0" max="1" step="0.1" value="0" style="display: none;">
+              </div>
+              
+              <div class="product-info">
+                <h3>Rabbit</h3>
+                <p>Gentle, curious, and full of personality. Perfect indoor companion.</p>
+                <div class="price">₹899 <small>/ piece</small></div>
+              </div>
+            </div>
+          </div>
+          <div class="meta">
+            <div class="qty" data-price="899">
+              <button class="dec">−</button>
+              <span class="count">1</span>
+              <button class="inc">+</button>
+            </div>
+            <div class="total">Total: ₹899</div>
+            <button class="btn buy" data-name="Rabbit Friend" data-price="899">
+              <i class="fab fa-whatsapp"></i>
+              Buy on WhatsApp
+            </button>
+            <button class="btn info" data-info="Rabbits are intelligent, social animals that can be litter-trained. They need space to hop around, chew toys, and a diet of hay, fresh vegetables, and pellets. Average lifespan is 8-12 years with proper care.">
+              <i class="fas fa-info-circle"></i>
+              More Info
+            </button>
+          </div>
+        </article>
+
+        <!-- White Rat -->
+        <article class="card">
+          <div class="card-header">
+            <div class="media">
+              <div class="progress-container">
+                <div class="progress-bar" id="rat-progress"></div>
+              </div>
+              <video id="rat-video" muted loop playsinline autoplay>
+                <source src="rat.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              
+              <div class="video-ui">
+                <div class="action-button" onclick="likeVideo('rat')">
+                  <i class="fas fa-heart"></i>
+                  <span id="rat-likes">198</span>
+                </div>
+                <div class="action-button" onclick="window.open('https://api.whatsapp.com/send/?phone=9336621196&text=Hi!%20I%20love%20this%20White%20Rat%20Friend!', '_blank')">
+                  <i class="fab fa-whatsapp"></i>
+                  <span>Order</span>
+                </div>
+                <div class="action-button" onclick="shareVideo('rat')">
+                  <i class="fas fa-share"></i>
+                  <span>Share</span>
+                </div>
+              </div>
+              
+              <div class="video-controls">
+                <button class="control-btn" onclick="toggleMute('rat')">
+                  <i class="fas fa-volume-mute" id="rat-volume-icon"></i>
+                </button>
+                <input type="range" class="volume-slider" id="rat-volume" min="0" max="1" step="0.1" value="0" style="display: none;">
+              </div>
+              
+              <div class="product-info">
+                <h3>White Rat</h3>
+                <p>Intelligent, social, and easily trained. Makes a wonderful pocket pet.</p>
+                <div class="price">₹349 <small>/ piece</small></div>
+              </div>
+            </div>
+          </div>
+          <div class="meta">
+            <div class="qty" data-price="349">
+              <button class="dec">−</button>
+              <span class="count">1</span>
+              <button class="inc">+</button>
+            </div>
+            <div class="total">Total: ₹349</div>
+            <button class="btn buy" data-name="White Rat Friend" data-price="349">
+              <i class="fab fa-whatsapp"></i>
+              Buy on WhatsApp
+            </button>
+            <button class="btn info" data-info="Rats are highly intelligent and social animals that bond strongly with their owners. They're clean, easily trained, and enjoy interactive toys. Average lifespan is 2-3 years. Best kept in same-sex pairs.">
+              <i class="fas fa-info-circle"></i>
+              More Info
+            </button>
+          </div>
+        </article>
       </section>
       
       <!-- Support Button -->
@@ -793,9 +911,9 @@
   <footer>
     <div class="footer-content">
       <div class="footer-links">
-        <a href="#" data-info="We offer safe and comfortable transportation for your new feathered friends. Delivery within 24 hours in the city.">Delivery Info</a>
-        <a href="#" data-info="We provide care instructions and support for all our birds. Contact us anytime for advice.">Care Support</a>
-        <a href="#" data-info="All our birds are vet-checked and come with a health guarantee.">Health Guarantee</a>
+        <a href="#" data-info="We offer safe and comfortable transportation for your new pets. Delivery within 24 hours in the city.">Delivery Info</a>
+        <a href="#" data-info="We provide care instructions and support for all our animals. Contact us anytime for advice.">Care Support</a>
+        <a href="#" data-info="All our pets are vet-checked and come with a health guarantee.">Health Guarantee</a>
       </div>
       <p>© <span id="year"></span> Blank Pets — Friends, not products.</p>
     </div>
@@ -911,7 +1029,7 @@
       if (navigator.share) {
         navigator.share({
           title: 'Blank Pets',
-          text: 'Check out this beautiful bird from Blank Pets!',
+          text: 'Check out this beautiful pet from Blank Pets!',
           url: window.location.href
         })
         .catch(error => {
@@ -933,11 +1051,12 @@
       });
     });
     
-    // Set up video progress and volume controls
-    setupVideoProgress('budgie');
-    setupVideoProgress('finch');
-    setupVolumeControl('budgie');
-    setupVolumeControl('finch');
+    // Set up video progress and volume controls for all pets
+    const pets = ['budgie', 'finch', 'rabbit', 'rat'];
+    pets.forEach(pet => {
+      setupVideoProgress(pet);
+      setupVolumeControl(pet);
+    });
     
     // Quantity controls
     document.querySelectorAll('.qty').forEach(q => {
