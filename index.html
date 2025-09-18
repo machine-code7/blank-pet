@@ -6,7 +6,7 @@
   <link rel="icon" type="image/png" href="logo.png">
   <title>Blank Pets — Online Pet's</title>
   <meta name="theme-color" content="#0a5d36">
-  <meta name="description" content="Blank Pets: buy budgie, finch, rabbit & white rat friends with video previews. Mobile-optimized, WhatsApp ordering." />
+  <meta name="description" content="Blank Pets: buy rabbit, budgie, finch & white rat friends with video previews. Mobile-optimized, WhatsApp ordering." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -20,8 +20,8 @@
       --brand-light: #0c7744;
       --accent: #ffdd00;
       --accent-light: #ffea80;
-      --radius: 16px;
-      --shadow: 0 6px 16px rgba(0,0,0,.3);
+      --radius: 12px;
+      --shadow: 0 4px 12px rgba(0,0,0,.3);
       --card-bg: rgba(30, 30, 30, 0.8);
     }
     
@@ -122,7 +122,7 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 20px;
+      gap: 15px;
       margin-top: 20px;
     }
     
@@ -181,9 +181,9 @@
     
     .media {
       position: relative;
-      height: 70vh;
-      max-height: 700px;
-      min-height: 500px;
+      height: 65vh;
+      max-height: 600px;
+      min-height: 450px;
       overflow: hidden;
       display: flex;
       align-items: center;
@@ -541,7 +541,7 @@
       }
       
       .media {
-        height: 65vh;
+        height: 60vh;
         min-height: 400px;
       }
       
@@ -585,7 +585,7 @@
       }
       
       .media {
-        height: 60vh;
+        height: 55vh;
         min-height: 350px;
       }
       
@@ -651,6 +651,65 @@
 
     <div class="container">
       <section class="video-feed">
+        <!-- Rabbit -->
+        <article class="card">
+          <div class="card-header">
+            <div class="media">
+              <div class="progress-container">
+                <div class="progress-bar" id="rabbit-progress"></div>
+              </div>
+              <video id="rabbit-video" muted loop playsinline autoplay>
+                <source src="rabbit.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              
+              <div class="video-ui">
+                <div class="action-button" onclick="likeVideo('rabbit')">
+                  <i class="fas fa-heart"></i>
+                  <span id="rabbit-likes">312</span>
+                </div>
+                <div class="action-button" onclick="window.open('https://api.whatsapp.com/send/?phone=9336621196&text=Hi!%20I%20love%20this%20Rabbit%20Friend!', '_blank')">
+                  <i class="fab fa-whatsapp"></i>
+                  <span>Order</span>
+                </div>
+                <div class="action-button" onclick="shareVideo('rabbit')">
+                  <i class="fas fa-share"></i>
+                  <span>Share</span>
+                </div>
+              </div>
+              
+              <div class="video-controls">
+                <button class="control-btn" onclick="toggleMute('rabbit')">
+                  <i class="fas fa-volume-mute" id="rabbit-volume-icon"></i>
+                </button>
+                <input type="range" class="volume-slider" id="rabbit-volume" min="0" max="1" step="0.1" value="0" style="display: none;">
+              </div>
+              
+              <div class="product-info">
+                <h3>Rabbit</h3>
+                <p>Gentle, curious, and full of personality. Perfect indoor companion.</p>
+                <div class="price">₹349 <small>/ piece</small></div>
+              </div>
+            </div>
+          </div>
+          <div class="meta">
+            <div class="qty" data-price="349">
+              <button class="dec">−</button>
+              <span class="count">1</span>
+              <button class="inc">+</button>
+            </div>
+            <div class="total">Total: ₹349</div>
+            <button class="btn buy" data-name="Rabbit Friend" data-price="349">
+              <i class="fab fa-whatsapp"></i>
+              Buy on WhatsApp
+            </button>
+            <button class="btn info" data-info="Rabbits are intelligent, social animals that can be litter-trained. They need space to hop around, chew toys, and a diet of hay, fresh vegetables, and pellets. Average lifespan is 8-12 years with proper care.">
+              <i class="fas fa-info-circle"></i>
+              More Info
+            </button>
+          </div>
+        </article>
+
         <!-- Budgie -->
         <article class="card">
           <div class="card-header">
@@ -763,65 +822,6 @@
               Buy on WhatsApp
             </button>
             <button class="btn info" data-info="Finches enjoy small flocks and need space to fly. They're not typically hand-tamed but are delightful to watch. They live 5-10 years and enjoy baths and varied perches.">
-              <i class="fas fa-info-circle"></i>
-              More Info
-            </button>
-          </div>
-        </article>
-
-        <!-- Rabbit -->
-        <article class="card">
-          <div class="card-header">
-            <div class="media">
-              <div class="progress-container">
-                <div class="progress-bar" id="rabbit-progress"></div>
-              </div>
-              <video id="rabbit-video" muted loop playsinline autoplay>
-                <source src="rabbit.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-              </video>
-              
-              <div class="video-ui">
-                <div class="action-button" onclick="likeVideo('rabbit')">
-                  <i class="fas fa-heart"></i>
-                  <span id="rabbit-likes">312</span>
-                </div>
-                <div class="action-button" onclick="window.open('https://api.whatsapp.com/send/?phone=9336621196&text=Hi!%20I%20love%20this%20Rabbit%20Friend!', '_blank')">
-                  <i class="fab fa-whatsapp"></i>
-                  <span>Order</span>
-                </div>
-                <div class="action-button" onclick="shareVideo('rabbit')">
-                  <i class="fas fa-share"></i>
-                  <span>Share</span>
-                </div>
-              </div>
-              
-              <div class="video-controls">
-                <button class="control-btn" onclick="toggleMute('rabbit')">
-                  <i class="fas fa-volume-mute" id="rabbit-volume-icon"></i>
-                </button>
-                <input type="range" class="volume-slider" id="rabbit-volume" min="0" max="1" step="0.1" value="0" style="display: none;">
-              </div>
-              
-              <div class="product-info">
-                <h3>Rabbit</h3>
-                <p>Gentle, curious, and full of personality. Perfect indoor companion.</p>
-                <div class="price">₹399 <small>/ piece</small></div>
-              </div>
-            </div>
-          </div>
-          <div class="meta">
-            <div class="qty" data-price="399">
-              <button class="dec">−</button>
-              <span class="count">1</span>
-              <button class="inc">+</button>
-            </div>
-            <div class="total">Total: ₹399</div>
-            <button class="btn buy" data-name="Rabbit Friend" data-price="399">
-              <i class="fab fa-whatsapp"></i>
-              Buy on WhatsApp
-            </button>
-            <button class="btn info" data-info="Rabbits are intelligent, social animals that can be litter-trained. They need space to hop around, chew toys, and a diet of hay, fresh vegetables, and pellets. Average lifespan is 8-12 years with proper care.">
               <i class="fas fa-info-circle"></i>
               More Info
             </button>
@@ -1052,7 +1052,7 @@
     });
     
     // Set up video progress and volume controls for all pets
-    const pets = ['budgie', 'finch', 'rabbit', 'rat'];
+    const pets = ['rabbit', 'budgie', 'finch', 'rat'];
     pets.forEach(pet => {
       setupVideoProgress(pet);
       setupVolumeControl(pet);
